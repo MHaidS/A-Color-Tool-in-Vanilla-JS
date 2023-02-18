@@ -1,14 +1,15 @@
-/* IN PROGRESS!!!!! */
-
 * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
-  background-color: #3e4560;
-  color: white;
+  font-family: "Rubik", sans-serif;
+  /* background-color: #3e4560; */
+  background-color: #b5838d;
+
+  /* color: white; */
+  color: #eae2b7;
 }
 
 .container {
@@ -18,7 +19,8 @@ body {
 .title {
   text-align: center;
   margin: 20px;
-  color: #d6d5ac;
+  /* color: #d6d5ac; */
+  color: #ffbe0b;
 }
 
 label {
@@ -40,15 +42,11 @@ input[type="text"] {
 .box {
   height: 100px;
   width: 100%;
-  background-color: #c6d5ac;
+  /* background-color: #c6d5ac; */
+  background-color: #6d6875;
+
   margin-bottom: 25px;
 }
-
-/* 14. Create Custom Toggle Button Styling */
-
-/* style the toggle button as well as the inner circle  using explicit sizing */
-/* choose fun colors */
-/*  define an unselected class that will de-emphasize the non-selected text */
 
 /* display labels and toggle horizontally */
 .toggle {
@@ -61,10 +59,13 @@ input[type="text"] {
   font-size: 18px;
 }
 
+/* style the toggle button as well as the inner circle  using explicit sizing */
 .toggle-btn {
   height: 30px;
   width: 60px;
-  background-color: gray;
+  /* background-color: gray; */
+  background-color: #ffcdb2;
+
   border-radius: 30px;
   padding: 5px;
   margin: 0 10px;
@@ -74,7 +75,9 @@ input[type="text"] {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #ffb4a2;
+
   transition: all 250ms;
 }
 
@@ -82,9 +85,11 @@ input[type="text"] {
 .toggle-btn.toggled > .inner-circle {
   /* this will move the .inner-circle to the other side */
   transform: translateX(30px);
-  background-color: #333;
+  /* background-color: #333; */
+  background-color: #e5989b;
 }
 
+/* define an .unselected class that will de-emphasize the non-selected text */
 .unselected {
   opacity: 0.25;
 }
