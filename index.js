@@ -1,7 +1,30 @@
 // IN PROGRESS!!!!!
-
+// Hexadecimal string notation ===> Each color component can be represented as a number between 0 and 255 (0x00 and 0xFF) or, optionally, as a number between 0 and 15 (0x0 and 0xF). All components must be specified using the same number of digits. If you use the single-digit notation, the final color is computed by using each component's digit twice; that is, "#D" becomes "#DD" when drawing.
+// RGB functional notation ===> RGB (Red/Green/Blue) functional notation, like hexadecimal string notation, represents colors using their red, green, and blue components. The color is defined using the CSS function rgb(). Each must be an <integer> value between 0 and 255 (inclusive), or a <percentage> from 0% to 100%.
 const hexInput = document.getElementById("hexInput");
 const inputColor = document.getElementById("inputColor");
+const alteredColor = document.getElementById("alteredColor");
+const alteredColorText = document.getElementById("alteredColorText");
+const sliderText = document.getElementById("sliderText");
+const slider = document.getElementById("slider");
+const lightenText = document.getElementById("lightenText");
+const darkenText = document.getElementById("darkenText");
+const toggleBtn = document.getElementById("toggleBtn");
+
+//click event listener to the toggle btn
+toggleBtn.addEventListener("click", () => {
+  if (toggleBtn.classList.contains("toggled")) {
+    // Lighten is highlighted
+    toggleBtn.classList.remove("toggled");
+    lightenText.classList.remove("unselected");
+    darkenText.classList.add("unselected");
+  } else {
+    // Darken is highlighted
+    toggleBtn.classList.add("toggled");
+    lightenText.classList.add("unselected");
+    darkenText.classList.remove("unselected");
+  }
+});
 
 hexInput.addEventListener("keyup", () => {
   const hex = hexInput.value;
@@ -18,12 +41,6 @@ const isValidHex = (hex) => {
   const strippedHex = hex.replace("#", "");
   return strippedHex.length === 3 || strippedHex.length === 6;
 };
-
-//Create a function to convert Hex to RGB
-//this should work with 3 or 6 character hex values
-//Hint - use parseInt("", 16) to convert a hex value to a decimal value
-//should return an object with 3 properties - r,g, and b
-//Test your function with a few different use cases
 
 const convertHexToRGB = (hex) => {
   if (!isValidHex(hex)) return null;
@@ -47,15 +64,7 @@ const convertHexToRGB = (hex) => {
   return { r, g, b };
 };
 
-// 7. Convert RGB Color To Hex-Challenge Requirements
-//create the function converRGBToHex
-//take in 3 parameters - r,g, and b
-//for each (r,g,b) - create a hex pair that is two characters long
-//return hex value starting with a hashtag
-//example - r.toString(16)
-
 const convertRGBToHex = (r, g, b) => {
-  // regardless of how many characters 'r.toString(16)' returns, '0' will be added at the start & 'slice(-2)' will provide the last 2 characters of the string;
   const firstPair = ("0" + r.toString(16)).slice(-2);
   const secondPair = ("0" + g.toString(16)).slice(-2);
   const thirdPair = ("0" + b.toString(16)).slice(-2);
@@ -64,7 +73,57 @@ const convertRGBToHex = (r, g, b) => {
   return hex;
 };
 
-console.log(convertRGBToHex(255, 255, 255));
-// #ffffff
-console.log(convertRGBToHex(0, 255, 255));
-// #00ffff
+// 10. Alter Color By Percentage
+//Create the alterColor function which accepts hex value and percentage
+//convert the hex value to rgb
+//increase each r,g,b value by appropriate amount (percentage of 255)
+//use the new r,g,b values to convert to a hex value
+//return the hex value
+
+const alterColor = (hex, percentage) => {
+  const { r, g, b } = convertHexToRGB(hex);
+
+  const amount = Math.floor((percentage / 100) * 255);
+
+  const newR = increaseWithin0To255(r, amount);
+
+  const newG = increaseWithin0To255(g, amount);
+  // const newB = b + amount;
+  const newB = increaseWithin0To255(b, amount);
+
+  return convertRGBToHex(newR, newG, newB);
+};
+
+// 11. Ensure Hex Values Stay Between 0 & 255
+const increaseWithin0To255 = (hex, amount) => {
+  // const newHex = hex + amount;
+  // if (newHex > 255) return 255;
+  // if (newHex < 0) return 0;
+  // return newHex;
+  return Math.min(255, Math.max(0, hex + amount));
+};
+
+// console.log(alterColor("000", 10));
+// #191919  ====> '1' is eq to 16, + 9 == 25
+alterColor("fff", 10);
+
+// ALTER COLOR BASED ON USER INPUT
+slider.addEventListener("input", () => {
+  //check if hex is valid
+  if (!isValidHex(hexInput.value)) return;
+
+  sliderText.textContent = `${slider.value}%`;
+  //get the altered hex value
+
+  // ALTER COLOR BASED ON LIGHTEN/DARKEN TOGGLE STATE
+  //calculate the appropriate value for the color alteration
+  //between positive and negative
+  const valueAddition = toggleBtn.classList.contains("toggled")
+    ? -slider.value
+    : slider.value;
+
+  const alteredHex = alterColor(hexInput.value, valueAddition);
+  //update the altered color
+  alteredColor.style.backgroundColor = alteredHex;
+  alteredColorText.innerText = `Altered Color ${alteredHex}`;
+});

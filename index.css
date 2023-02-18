@@ -43,3 +43,48 @@ input[type="text"] {
   background-color: #c6d5ac;
   margin-bottom: 25px;
 }
+
+/* 14. Create Custom Toggle Button Styling */
+
+/* style the toggle button as well as the inner circle  using explicit sizing */
+/* choose fun colors */
+/*  define an unselected class that will de-emphasize the non-selected text */
+
+/* display labels and toggle horizontally */
+.toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.toggle-text {
+  font-size: 18px;
+}
+
+.toggle-btn {
+  height: 30px;
+  width: 60px;
+  background-color: gray;
+  border-radius: 30px;
+  padding: 5px;
+  margin: 0 10px;
+}
+
+.inner-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  transition: all 250ms;
+}
+
+/* if the .toggle-btn has a class of .toggled, we'll grab the .inner-circle & add some styles there */
+.toggle-btn.toggled > .inner-circle {
+  /* this will move the .inner-circle to the other side */
+  transform: translateX(30px);
+  background-color: #333;
+}
+
+.unselected {
+  opacity: 0.25;
+}

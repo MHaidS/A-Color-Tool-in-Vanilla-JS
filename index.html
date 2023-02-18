@@ -23,14 +23,27 @@
       
       <label for="hex">Color (Hex)</label>
       <input type="text" name="hex" id="hexInput" 
-      placeholder="#000000"/>
+      placeholder="#000000" value="#c6d5ac" />
       
+      <!-- CREATE CUSTOM TOGGLE BUTTON LAYOUT -->
+      <!-- div with a class of toggle -->
+      <div class="toggle">
+        <!-- two pieces of text - lighten/darken -->
+        <p id="lightenText" class="toggle-text">Lighten</p>
+
+        <div id="toggleBtn" class="toggle-btn">
+          <div class="inner-circle"></div>
+        </div>
+        <p id="darkenText" class="toggle-text unselected">Darken</p>
+      </div>
+
       <label for="slider" id="sliderText">0%</label>
       <input type="range" min="0" max="100" value="0"
           class="slider" id="slider" name="slider"</input>
+
       <p>Input Color</p>
       <div id="inputColor" class="box"></div>
-      <p>Altered Color</p>
+      <p id="alteredColorText">Altered Color</p>
       <div id="alteredColor" class="box"></div>
   </div>
   
